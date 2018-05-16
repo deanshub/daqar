@@ -1,0 +1,33 @@
+{
+  "name": "daqar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "daq",
+    "National",
+    "Instruments"
+  ],
+  "author": "Dean Shub <deanshub@gmail.com> (https://github.com/deanshub)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "rxjs": "^6.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^22.4.3",
+    "nodemon": "^1.17.4",
+    "prettier": "^1.12.1"
+  }
+}

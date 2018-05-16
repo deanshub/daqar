@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": ["prettier"],
+  "extends": ["plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": 2,
+    "indent": [2, 2],
+    "quotes": [2, "single"],
+    "semi": [2, "never"],
+    "comma-dangle": [1, "always-multiline"],
+    "constructor-super": 2,
+    "no-confusing-arrow": 2,
+    "no-constant-condition": 2,
+    "no-class-assign": 2,
+    "no-unused-vars": 2,
+    "no-unused-expressions": 2,
+    "no-undef": 2,
+    "no-const-assign": 2,
+    "no-dupe-class-members": 2,
+    "no-var": 1,
+    "no-console": 0,
+    "no-this-before-super": 2,
+    "object-shorthand": [2, "always"],
+    "prefer-spread": 1,
+    "prefer-template": 1,
+    "require-yield": 2
+  }
+}
