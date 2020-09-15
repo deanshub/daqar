@@ -36,7 +36,7 @@ export function createTaskByChannelsNames(
 ) {
   const task = new daqmx.AIVoltageTask({
     device,
-    channels: channelsNames.map(name => {
+    channels: channelsNames.map((name) => {
       return { terminal: name }
     }),
     sampleTiming: {
@@ -70,7 +70,7 @@ export function createTaskByConsecutiveChannels(
 }
 
 export function readSamples(task) {
-  const readAsync = observable => {
+  const readAsync = (observable) => {
     process.nextTick(() => {
       // call canRead() tests if all samples can be read
       if (task.canRead()) {

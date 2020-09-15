@@ -20,7 +20,7 @@ test('get devices', () => {
   expect(devices[0]).toHaveProperty('productType')
 })
 
-test('read from device', done => {
+test('read from device', (done) => {
   const device = 'Dev1'
   const rate = 10000.0
   const samplesPerChannel = 10
@@ -34,7 +34,7 @@ test('read from device', done => {
   )
 
   let threeDataPoints = []
-  daqController.readSamples(task).subscribe(data => {
+  daqController.readSamples(task).subscribe((data) => {
     threeDataPoints.push(data)
     expect(data).toBeDefined()
     if (threeDataPoints.length >= 3) {
@@ -44,15 +44,97 @@ test('read from device', done => {
   })
 })
 
-test('get simulated data that is over 5 times and max of 1000', done => {
+test('get simulated data that is over 5 times and max of 1000', (done) => {
   const soundThreshold = 0.5
   const minTimesToStart = 5
   const minTimesToEnd = 5
   const maxTimes = 1000
   const muteThreshold = 0.5 // default soundThreshold
 
-  const dataStream = Rx.from([0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,1,1,1,1,0,0,0,1,1,1,1,1,0,1,1,0,1,1,1,1,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0]).pipe(share())
-  const expectedResults = [1,1,1,1,0,0,0,1,1,1,1,1,0,1,1,0,1,1,1,1,0,0,0,0,1,0,0,0,1,1]
+  const dataStream = Rx.from([
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+  ]).pipe(share())
+  const expectedResults = [
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+  ]
 
   // const valuedStream = dataStream.pipe(
   //   skipWhile(sample => {
@@ -62,9 +144,9 @@ test('get simulated data that is over 5 times and max of 1000', done => {
 
   const lastSamplesAreAboveThreshold = dataStream.pipe(
     bufferCount(minTimesToStart, 1),
-    takeWhile(group => group.length === minTimesToStart),
-    filter(group => {
-      const mutedSample = group.find(sample => {
+    takeWhile((group) => group.length === minTimesToStart),
+    filter((group) => {
+      const mutedSample = group.find((sample) => {
         return sample < soundThreshold
       })
       return mutedSample === undefined
@@ -76,9 +158,9 @@ test('get simulated data that is over 5 times and max of 1000', done => {
 
   const lastSamplesAreBelowThreshold = soundStream.pipe(
     bufferCount(minTimesToEnd, 1),
-    takeWhile(group => group.length === minTimesToEnd),
-    filter(lastX => {
-      return lastX.find(sample => sample > muteThreshold) === undefined
+    takeWhile((group) => group.length === minTimesToEnd),
+    filter((lastX) => {
+      return lastX.find((sample) => sample > muteThreshold) === undefined
     })
   )
   const maxSamples = soundStream.pipe(take(maxTimes))
@@ -93,7 +175,7 @@ test('get simulated data that is over 5 times and max of 1000', done => {
   // })
 
   soundStreamFiltered.subscribe(
-    sample => {
+    (sample) => {
       results.push(sample)
     },
     console.error,
